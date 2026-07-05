@@ -169,8 +169,13 @@ function Hero() {
   );
 }
 
+const REVIEW_QUOTES = [
+  { text: 'Chris from Paradiso is amazing — nice, professional, and a real small Ballard business.', source: 'via Nextdoor' },
+  { text: 'Found their responsiveness and follow-through excellent — highly recommend for any plumbing need.', source: 'via BuildZoom' },
+];
+
 function Features() {
-  const [shuffleOrder, setShuffleOrder] = useState([0, 1, 2]);
+  const [shuffleOrder, setShuffleOrder] = useState(REVIEW_QUOTES.map((_, i) => i));
 
   return (
     <section id="features" className="bg-surface text-white py-24 md:py-32">
@@ -191,14 +196,12 @@ function Features() {
                 className="absolute inset-8 rounded-2xl bg-primary p-5 flex flex-col justify-between transition-all duration-500"
                 style={{
                   transform: `translateY(${pos * 10}px) scale(${1 - pos * 0.05})`,
-                  zIndex: 10 - pos,
-                  opacity: pos === 2 ? 0 : 1,
+                  zIndex: REVIEW_QUOTES.length - pos,
+                  opacity: pos === REVIEW_QUOTES.length - 1 ? 0 : 1,
                 }}
               >
-                <p className="font-flourish italic text-lg">
-                  {['"Fixed it same day, no drama."', '"Finally, an honest plumber."', '"Showed up when they said they would."'][idx]}
-                </p>
-                <p className="text-xs text-white/60 font-mono">— Ballard homeowner</p>
+                <p className="font-flourish italic text-lg">"{REVIEW_QUOTES[idx].text}"</p>
+                <p className="text-xs text-white/60 font-mono">— {REVIEW_QUOTES[idx].source}</p>
               </div>
             ))}
           </div>
